@@ -2,7 +2,6 @@ package com.example.work2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.fragment.NavHostFragment
 import com.example.work2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity()  {
@@ -15,15 +14,16 @@ class MainActivity : AppCompatActivity()  {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
-
         // Получение корневого представления разметки
         val view = binding.root
         // Установка корневого представления разметки в качестве контента активности
         setContentView(view)
         //Ручное управление транзакциями фрагментов:
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_conatainer,FirstFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment,FirstFragment()).commit()
+
 
 
 
     }
+
 }

@@ -23,9 +23,11 @@ class FirstFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Создание экземпляра класса Fragment1Binding и связывание его с разметкой фрагмента
         binding = FragmentFirstBinding.inflate(inflater, container, false)
+
+
 
         binding.imageView.setOnClickListener {
             if(!image_change) {
@@ -38,12 +40,15 @@ class FirstFragment : Fragment() {
             }
         }
 
+
+
         binding.buttonFr1ToFr2.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(
-                R.id.fragment_conatainer,SecondFragment()).addToBackStack(null).commit()
+                R.id.nav_host_fragment,SecondFragment()).addToBackStack(null).commit()
         }
 
         binding.buttonFr1ToFr2API.setOnClickListener {
+
             findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
         }
 

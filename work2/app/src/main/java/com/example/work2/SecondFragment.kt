@@ -43,7 +43,7 @@ class SecondFragment : Fragment() {
         }
         binding.buttonFr2ToFr3.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(
-                R.id.fragment_conatainer,ThirdFragment()).addToBackStack(null).commit()
+                R.id.nav_host_fragment,ThirdFragment()).addToBackStack(null).commit()
         }
         binding.buttonFr2ToFr3API.setOnClickListener {
 
