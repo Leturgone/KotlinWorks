@@ -25,6 +25,7 @@ class FirstFragment : Fragment() {
         // Создание экземпляра класса Fragment1Binding и связывание его с разметкой фрагмента
         binding = FragmentFirstBinding.inflate(inflater, container, false)
 
+
         return binding.root
     }
 
