@@ -23,13 +23,13 @@
         android:id="@+id/button_fr1_to_fr2"
         android:layout_width="155dp"
         android:layout_height="93dp"
-        android:text="На следующий фрагмент Navigation API"
+        android:text="На следующий фрагмент"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.867"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.753"
+        app:layout_constraintStart_toEndOf="@+id/button_fr1_to_fr2API"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.71" />
+        app:layout_constraintVertical_bias="0.711" />
 
     <ImageView
         android:id="@+id/imageView"

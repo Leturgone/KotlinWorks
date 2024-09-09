@@ -23,7 +23,7 @@
         android:id="@+id/button_fr2_to_fr3"
         android:layout_width="155dp"
         android:layout_height="93dp"
-        android:text="На следующий фрагмент Navigation API"
+        android:text="На следующий фрагмент"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.867"
@@ -47,7 +47,7 @@
         android:id="@+id/button_fr2_to_fr1"
         android:layout_width="155dp"
         android:layout_height="93dp"
-        android:text="На предыдущий фрагмент Navigation API"
+        android:text="На предыдущий фрагмент"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.867"
@@ -79,4 +79,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.123" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

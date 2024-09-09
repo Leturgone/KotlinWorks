@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.work2.databinding.FragmentFirstBinding
 
 
 class FirstFragment : Fragment() {
 
     private lateinit var binding: FragmentFirstBinding
+    private var image_change = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +27,25 @@ class FirstFragment : Fragment() {
         // Создание экземпляра класса Fragment1Binding и связывание его с разметкой фрагмента
         binding = FragmentFirstBinding.inflate(inflater, container, false)
 
+        binding.imageView.setOnClickListener {
+            if(!image_change) {
+                binding.imageView.setImageResource(R.drawable.varan1hat)
+                image_change = true
+            }
+            else{
+                binding.imageView.setImageResource(R.drawable.varan1)
+                image_change = false
+            }
+        }
+
+        binding.buttonFr1ToFr2.setOnClickListener {
+            parentFragmentManager.beginTransaction().replace(
+                R.id.fragment_conatainer,SecondFragment()).addToBackStack(null).commit()
+        }
+
+        binding.buttonFr1ToFr2API.setOnClickListener {
+            findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
+        }
 
         return binding.root
     }
