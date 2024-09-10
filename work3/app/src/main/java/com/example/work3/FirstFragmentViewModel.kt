@@ -5,9 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class FirstFragmentViewModel: ViewModel() {
-    private val _currentImage = MutableLiveData<Int>(R.drawable.varan1) //хранит текущее изображение. И
+    val _currentImage = MutableLiveData<Int>(R.drawable.varan1) //хранит текущее изображение. И
     // нициализируется с изображением varan1.
-    val currentImage  = _currentImage
     private var imageChanged = false
 
     fun toggleImage() {

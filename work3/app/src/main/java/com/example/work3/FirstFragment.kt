@@ -14,7 +14,6 @@ import com.example.work3.databinding.FragmentFirstBinding
 class FirstFragment : Fragment() {
     private lateinit var viewModel: FirstFragmentViewModel
     private lateinit var binding: FragmentFirstBinding
-    private var image_change = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +34,8 @@ class FirstFragment : Fragment() {
         binding.imageView.setOnClickListener {
             viewModel.toggleImage()
         }
-        viewModel.currentImage.observe(viewLifecycleOwner, Observer {data ->
+        viewModel._currentImage.observe(viewLifecycleOwner,
+            Observer {data ->
             binding.imageView.setImageResource(data)
 
         })
