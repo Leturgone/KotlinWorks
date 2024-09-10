@@ -38,15 +38,10 @@ class SecondFragment : Fragment() {
         binding.buttonFr2ToFr1.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
-        binding.buttonFr2ToFr1API.setOnClickListener {
 
-        }
         binding.buttonFr2ToFr3.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(
                 R.id.nav_host_fragment,ThirdFragment()).addToBackStack(null).commit()
-        }
-        binding.buttonFr2ToFr3API.setOnClickListener {
-
         }
 
         return binding.root

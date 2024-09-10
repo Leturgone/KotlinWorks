@@ -47,10 +47,6 @@ class FirstFragment : Fragment() {
                 R.id.nav_host_fragment,SecondFragment()).addToBackStack(null).commit()
         }
 
-        binding.buttonFr1ToFr2API.setOnClickListener {
-
-            findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
-        }
 
         return binding.root
     }

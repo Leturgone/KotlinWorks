@@ -37,9 +37,6 @@ class ThirdFragment : Fragment() {
         binding.buttonFr3ToFr2.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
-        binding.buttonFr3ToFr2API.setOnClickListener {
-
-        }
 
         return binding.root
     }
