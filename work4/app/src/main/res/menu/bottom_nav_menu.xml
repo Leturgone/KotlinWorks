@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/camera"
+        android:icon="@drawable/ic_camera_name"
+        android:title="Камера"/>
+    <item
+        android:id="@+id/list"
+        android:icon="@drawable/ic_action_name"
+        android:title="Список"/>
+</menu>
