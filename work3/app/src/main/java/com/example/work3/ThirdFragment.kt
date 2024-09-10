@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.work3.databinding.FragmentThirdBinding
 
 class ThirdFragment : Fragment() {
+
     private lateinit var binding: FragmentThirdBinding
     private  lateinit var viewModel: ThirdFragmentViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
