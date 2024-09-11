@@ -24,9 +24,9 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         // Создание экземпляра класса Fragment1Binding и связывание его с разметкой фрагмента
         binding = FragmentFirstBinding.inflate(inflater, container, false)
-
 
 
         binding.imageView.setOnClickListener {
