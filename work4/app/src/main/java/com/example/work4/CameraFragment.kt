@@ -76,7 +76,21 @@ class CameraFragment : Fragment() {
                     }
                 }
             )
+//            val currentDateTime = LocalDateTime.now()
+//            val formattedDateTime = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+//            // Затем создадим строку с данными для сохранения
+//            val dataToSave = "Date: $formattedDateTime, Text: $date"
+//            // Путь к файлу для сохранения данных
+//            val filePath = File(context.getExternalFilesDir("photos"), "data.txt")
+//
+//            try {
+//                // Создаем новый файл или перезаписываем существующий
+//                filePath.writeText(dataToSave)
+//            } catch (e: Exception) {
+//                Log.e("Error", "Failed to save data to file: ${e.message}")
+//            }
         }
+
 
         return binding.root
     }
