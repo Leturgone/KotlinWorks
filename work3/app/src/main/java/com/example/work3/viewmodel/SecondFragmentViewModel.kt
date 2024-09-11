@@ -1,7 +1,8 @@
-package com.example.work3
+package com.example.work3.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.work3.R
 
 class SecondFragmentViewModel: ViewModel() {
     val _currentImage = MutableLiveData<Int>(R.drawable.varan2)

@@ -1,7 +1,8 @@
-package com.example.work3
+package com.example.work3.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.work3.R
 import com.example.work3.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity()  {
