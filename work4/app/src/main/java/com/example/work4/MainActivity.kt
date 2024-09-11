@@ -9,23 +9,21 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-
-        loadFragment(CameraFragment())
-
-        binding.bottomNavigationView.setOnItemSelectedListener {
+        setContentView(binding.root)
+        //loadFragment(CameraFragment())
+        binding.bottomNavigationView.setOnItemSelectedListener() {
             when (it.itemId){
                 R.id.camera ->{
                     loadFragment(CameraFragment())
-                    true
+                    return@setOnItemSelectedListener true
                 }
                 R.id.list ->{
                     loadFragment(ListFragment())
-                    true
+                    return@setOnItemSelectedListener true
                 }else ->{
-                    false
+                    return@setOnItemSelectedListener false
                 }
 
             }
