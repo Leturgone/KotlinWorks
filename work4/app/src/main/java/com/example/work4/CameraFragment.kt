@@ -28,6 +28,7 @@ import java.util.concurrent.Executors
 
 class CameraFragment : Fragment() {
     private lateinit var cameraExecutor: ExecutorService
+    private var imageCapture: ImageCapture? = null
     private lateinit var viewFinder: PreviewView
     private lateinit var binding: FragmentCameraBinding
 
@@ -55,42 +56,8 @@ class CameraFragment : Fragment() {
         }
 
         binding.imageView.setOnClickListener {
-            val imageCapture = ImageCapture.Builder().build()
-
-
-            val photoFile = File(
-                requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-                "photos/${SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())}.jpg"
-            )
-            val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-
-            imageCapture.takePicture(
-                outputOptions, cameraExecutor, object : ImageCapture.OnImageSavedCallback {
-                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                        Toast.makeText(requireActivity(),"Фото сохранено: ${photoFile.absolutePath}", Toast.LENGTH_LONG).show()
-                    }
-
-                    override fun onError(exception: ImageCaptureException) {
-                        Toast.makeText(requireActivity(),"Ошибка сохранения", Toast.LENGTH_LONG).show()
-                        Log.e("CameraFragment", "Photo capture failed: ${exception.message}", exception)
-                    }
-                }
-            )
-//            val currentDateTime = LocalDateTime.now()
-//            val formattedDateTime = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
-//            // Затем создадим строку с данными для сохранения
-//            val dataToSave = "Date: $formattedDateTime, Text: $date"
-//            // Путь к файлу для сохранения данных
-//            val filePath = File(context.getExternalFilesDir("photos"), "data.txt")
-//
-//            try {
-//                // Создаем новый файл или перезаписываем существующий
-//                filePath.writeText(dataToSave)
-//            } catch (e: Exception) {
-//                Log.e("Error", "Failed to save data to file: ${e.message}")
-//            }
+            takePhoto()
         }
-
 
         return binding.root
     }
@@ -103,17 +70,40 @@ class CameraFragment : Fragment() {
             val preview = Preview.Builder().build().also {
                 it.setSurfaceProvider(viewFinder.surfaceProvider)
             }
+            imageCapture = ImageCapture.Builder()
+                .build()
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(this,
-                    cameraSelector, preview)
+                    cameraSelector, preview, imageCapture)
                 Log.e("CAMERA", "Starting camera")
             } catch (exc: Exception) {
                 Log.e("CAMERA", "Error starting camera", exc)
                 exc.printStackTrace()
             }
         }, ContextCompat.getMainExecutor(requireContext()))
+
+    }
+    private fun takePhoto(){
+        val imageCapture = imageCapture ?: return
+        val photoFile = File(
+            requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+            "photos/${SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())}.jpg"
+        )
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+        imageCapture.takePicture(
+            outputOptions, cameraExecutor, object : ImageCapture.OnImageSavedCallback {
+                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                    //Toast.makeText(requireActivity(),"Фото сохранено: ${photoFile.absolutePath}", Toast.LENGTH_LONG).show()
+                }
+
+                override fun onError(exception: ImageCaptureException) {
+                    //Toast.makeText(requireActivity(),"Ошибка сохранения", Toast.LENGTH_LONG).show()
+                    Log.e("CameraFragment", "Photo capture failed: ${exception.message}", exception)
+                }
+            }
+        )
 
 
 
