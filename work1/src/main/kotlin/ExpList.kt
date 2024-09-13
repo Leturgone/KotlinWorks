@@ -22,6 +22,16 @@ class ExpList {
         expList.forEach{catList.add(it.getCat())}
         catList.forEach{printSumCat(it)}
     }
+    fun findExp(cat:String, sum: Int){
+        expList.forEach{
+            if (it.getCat() == cat && it.getExpSum() == sum){
+                println("Расход найден:")
+                it.displayInfo()
+                return
+            }
+        }
+        println("Расход не найден")
+    }
 
     fun printAllCat(cat:String){
         var k = 0

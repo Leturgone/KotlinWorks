@@ -7,6 +7,7 @@ fun main(args: Array<String>) {
         println("2.Вывод всех расходов")
         println("3.Подсчет суммы по каждой категории")
         println("4.Поиск по категории")
+        println("5.Поиск конкретного расхода")
         println("Выход любая другая клавиша")
         var ch = readlnOrNull().toString()
         if(ch == "1"){
@@ -38,7 +39,28 @@ fun main(args: Array<String>) {
         else if (ch == "4"){
             println("Введите категорию: ")
             val b = readlnOrNull().toString()
-            expList.printAllCat(b)
+            if (b.isOnlyLetters()) {
+                expList.printAllCat(b)
+            }else{
+                println("Категория должна быть словом")
+            }
+        }
+        else if(ch =="5"){
+            println("Введите категорию: ")
+            val b = readlnOrNull().toString()
+            if(b.isOnlyLetters()) {
+                println("Введите сумму расхода: ")
+                val a = readln().toIntOrNull()
+                if (a!= null) {
+                    expList.findExp(b, a)
+                }else{
+                    println("Расход должен состоять из чисел")
+                }
+
+            }else{
+                println("Категория должна быть словом")
+            }
+
         }
         else{
             break
