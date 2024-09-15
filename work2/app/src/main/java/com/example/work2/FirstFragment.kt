@@ -41,7 +41,6 @@ class FirstFragment : Fragment() {
         }
 
 
-
         binding.buttonFr1ToFr2.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(
                 R.id.nav_host_fragment,SecondFragment()).addToBackStack(null).commit()
