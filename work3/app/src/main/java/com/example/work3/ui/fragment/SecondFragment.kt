@@ -40,7 +40,7 @@ class SecondFragment : Fragment() {
             })
 
         binding.buttonFr2ToFr1API.setOnClickListener {
-            findNavController().navigate(R.id.action_secondFragment_to_firstFragment)
+            findNavController().popBackStack()
         }
 
         binding.buttonFr2ToFr3API.setOnClickListener {

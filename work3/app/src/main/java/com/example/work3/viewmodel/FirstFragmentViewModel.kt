@@ -6,7 +6,6 @@ import com.example.work3.R
 
 class FirstFragmentViewModel: ViewModel() {
     val _currentImage = MutableLiveData<Int>(R.drawable.varan1) //хранит текущее изображение. И
-    // нициализируется с изображением varan1.
     private var imageChanged = false
 
     fun toggleImage() {
