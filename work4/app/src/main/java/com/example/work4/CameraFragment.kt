@@ -99,7 +99,7 @@ class CameraFragment : Fragment() {
         val imageCapture = imageCapture ?: return
         val photoFile = File(
             outputDirectory,
-            "${SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())}.jpg"
+            "${SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date())}.jpg"
         )
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
         imageCapture.takePicture(
