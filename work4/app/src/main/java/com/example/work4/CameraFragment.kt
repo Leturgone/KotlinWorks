@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.Manifest
+import android.net.Uri
 import android.os.Environment
 import android.util.Log
 import android.widget.Toast
@@ -31,6 +32,7 @@ class CameraFragment : Fragment() {
     private var imageCapture: ImageCapture? = null
     private lateinit var viewFinder: PreviewView
     private lateinit var binding: FragmentCameraBinding
+    private lateinit var outputDirectory: File
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +47,9 @@ class CameraFragment : Fragment() {
     ): View? {
         binding = FragmentCameraBinding.inflate(inflater, container,false)
 
+        outputDirectory = getOutputDirectory()
         cameraExecutor = Executors.newSingleThreadExecutor()
+
         viewFinder = binding.previewView
 
         if (allPermissionsGranted()) {
@@ -67,17 +71,23 @@ class CameraFragment : Fragment() {
 
         cameraProviderFuture.addListener({
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-            val preview = Preview.Builder().build().also {
-                it.setSurfaceProvider(viewFinder.surfaceProvider)
-            }
-            imageCapture = ImageCapture.Builder()
-                .build()
+
+            val preview = Preview.Builder()
+                .build().
+                also {
+                    it.setSurfaceProvider(viewFinder.surfaceProvider)
+                }
+
+            imageCapture = ImageCapture.Builder().build()
+
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(this,
                     cameraSelector, preview, imageCapture)
-                Log.e("CAMERA", "Starting camera")
+                Log.i("CAMERA", "Starting camera")
+
             } catch (exc: Exception) {
                 Log.e("CAMERA", "Error starting camera", exc)
                 exc.printStackTrace()
@@ -88,24 +98,27 @@ class CameraFragment : Fragment() {
     private fun takePhoto(){
         val imageCapture = imageCapture ?: return
         val photoFile = File(
-            requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-            "photos/${SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())}.jpg"
+            outputDirectory,
+            "${SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())}.jpg"
         )
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
         imageCapture.takePicture(
             outputOptions, cameraExecutor, object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    //Toast.makeText(requireActivity(),"Фото сохранено: ${photoFile.absolutePath}", Toast.LENGTH_LONG).show()
+                    Log.i("CAMERA", "Фото сохранено: ${photoFile.absolutePath}")
+                    activity?.runOnUiThread {
+                        Toast.makeText(activity, "Фото сохранено: ${photoFile.absolutePath}", Toast.LENGTH_SHORT).show()
+                    }
                 }
 
                 override fun onError(exception: ImageCaptureException) {
-                    //Toast.makeText(requireActivity(),"Ошибка сохранения", Toast.LENGTH_LONG).show()
-                    Log.e("CameraFragment", "Photo capture failed: ${exception.message}", exception)
+                    activity?.runOnUiThread {
+                        Toast.makeText(activity, "Ошибка сохранения", Toast.LENGTH_SHORT).show()
+                    }
+                    Log.e("CAMERA", "Ошибка сохранения")
                 }
             }
         )
-
-
 
     }
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {it:String ->
@@ -123,6 +136,13 @@ class CameraFragment : Fragment() {
                 parentFragmentManager.beginTransaction().remove(this).commit()
             }
         }
+    }
+
+    private fun getOutputDirectory(): File {
+        val mediaDir = requireActivity().externalMediaDirs.firstOrNull()?.let {
+            File(requireActivity().filesDir, "photos").apply { mkdirs() }
+        }
+        return mediaDir ?: requireActivity().filesDir
     }
     override fun onDestroy() {
         super.onDestroy()
