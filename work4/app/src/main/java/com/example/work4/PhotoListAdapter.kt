@@ -1,6 +1,5 @@
 package com.example.work4
 
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
