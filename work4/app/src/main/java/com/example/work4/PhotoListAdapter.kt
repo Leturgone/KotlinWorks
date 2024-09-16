@@ -29,7 +29,6 @@ class PhotoListAdapter(private val data: MutableList<String>, private val images
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
-        val imageItem = images[position]
         holder.textView.text = item
         Picasso.with(holder.itemView.context).load(File(images[position])).into(holder.imageView)
     }
