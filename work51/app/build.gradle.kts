@@ -1,15 +1,14 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
 }
 
 android {
-    namespace = "com.example.work5"
+    namespace = "com.example.work51"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.work5"
+        applicationId = "com.example.work51"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -27,10 +26,6 @@ android {
             )
         }
     }
-    buildFeatures{
-        viewBinding= true
-    }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -42,18 +37,7 @@ android {
 
 dependencies {
 
-    implementation("com.github.bumptech.glide:glide:4.12.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.6")
-
-    ksp("androidx.room:room-compiler:2.6.1")
-    implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.room:room-ktx: 2.6.1")
-    annotationProcessor("androidx.room:room-compiler:2.6.1")
-
     implementation("androidx.core:core-ktx:1.13.1")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.google.code.gson:gson:2.10.1")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
