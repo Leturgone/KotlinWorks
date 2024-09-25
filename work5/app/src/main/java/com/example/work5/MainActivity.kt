@@ -1,14 +1,15 @@
 package com.example.work5
 
 
+import androidx.room.Room
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.room.Room
+import android.util.Log
 import com.example.work5.databinding.ActivityMainBinding
-import com.example.work5.model.dog.DogDB
-import com.example.work5.model.dog.DogsRepository
+import com.example.work5.model.recept.ReceptDB
+import com.example.work5.model.recept.ReceptsRepository
 import com.example.work5.retrofit.api.MainApi
-import com.example.work5.viewmodel.DogListAdapter
+import com.example.work5.viewmodel.ReceptListAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,30 +22,31 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         binding = ActivityMainBinding.inflate(layoutInflater)
 
-        val retrofit = Retrofit.Builder().baseUrl("https://dog.ceo/").addConverterFactory(GsonConverterFactory.create()).build()
+        val retrofit = Retrofit.Builder().baseUrl("https://dummyjson.com/").addConverterFactory(GsonConverterFactory.create()).build()
 
-        val dogApi = retrofit.create(MainApi::class.java)
+        val receptsApi = retrofit.create(MainApi::class.java)
 
 
         val db = Room.databaseBuilder(
-            applicationContext, DogDB::class.java,"dog_db").build()
-        val dogsDao= db.dogDao()
+            applicationContext, ReceptDB::class.java,"recept_db").build()
+        val receptsDao= db.receptsDao()
         val recyclerView = binding.reycler
         val dog_button = binding.dogButton
-        val rep = DogsRepository(dogsDao,dogApi)
+        val rep = ReceptsRepository(receptsDao,receptsApi)
 
-        CoroutineScope(Dispatchers.IO).launch {
-            rep.getDogsFromApi()
-            val images = rep.getAllDogsFromBase()
-            runOnUiThread {
-                recyclerView.adapter = DogListAdapter(images)
-            }
-        }
         dog_button.setOnClickListener{
+            Log.i("log","Нажалось")
 
-
+            CoroutineScope(Dispatchers.IO).launch {
+                rep.getReceptsFromApi()
+                val images = rep.getAllDogsFromBase()
+                runOnUiThread {
+                    recyclerView.adapter = ReceptListAdapter(images)
+                }
+            }
         }
 
     }

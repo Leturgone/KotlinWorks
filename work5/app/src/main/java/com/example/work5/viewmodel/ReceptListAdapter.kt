@@ -8,13 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.work5.R
-import com.example.work5.model.dog.Dog
+import com.example.work5.model.recept.Recept
 
-class DogListAdapter(private val dogs: MutableList<Dog>)
-    : RecyclerView.Adapter<DogListAdapter.ViewHolder>(){
+class ReceptListAdapter(private val recepts: MutableList<Recept>)
+    : RecyclerView.Adapter<ReceptListAdapter.ViewHolder>(){
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val textView: TextView = view.findViewById(R.id.itemTextView)
-        val imageView: ImageView = view.findViewById(R.id.ittemImageView)
+        val textView2: TextView = view.findViewById(R.id.textView)
+        val textView3: TextView = view.findViewById(R.id.textView2)
     }
 
 
@@ -25,13 +26,15 @@ class DogListAdapter(private val dogs: MutableList<Dog>)
     }
 
     override fun getItemCount(): Int {
-        return dogs.size
+        return recepts.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val dog = dogs[position]
-        holder.textView.text = dog.id.toString()
-        Glide.with(holder.itemView.context).load(dog.image).into(holder.imageView)
+        val recept = recepts[position]
+        holder.textView.text = recept.name
+        holder.textView2.text = recept.id.toString()
+        holder.textView3.text = recept.difficulty
+
 
     }
 

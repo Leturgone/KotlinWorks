@@ -1,9 +1,10 @@
 package com.example.work5.retrofit.api
 
-import com.example.work5.retrofit.model.DogModel
+import com.example.work5.retrofit.model.ReceptModel
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface MainApi {
-    @GET("api/breeds/image/random")
-    suspend fun getDog(): DogModel
+    @GET("recipes")
+    suspend fun getReseptById(@Path("id") id:Int): ReceptModel
 }
