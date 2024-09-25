@@ -5,6 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface MainApi {
-    @GET("recipes")
+    @GET("recipes/{id}")
     suspend fun getReseptById(@Path("id") id:Int): ReceptModel
 }

@@ -1,16 +1,15 @@
 package com.example.work5.viewmodel;
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.work5.R
 import com.example.work5.model.recept.Recept
 
-class ReceptListAdapter(private val recepts: MutableList<Recept>)
+class ReceptListAdapter(private var recepts: List<Recept>)
     : RecyclerView.Adapter<ReceptListAdapter.ViewHolder>(){
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val textView: TextView = view.findViewById(R.id.itemTextView)
@@ -35,7 +34,11 @@ class ReceptListAdapter(private val recepts: MutableList<Recept>)
         holder.textView2.text = recept.id.toString()
         holder.textView3.text = recept.difficulty
 
+    }
 
+    fun updateData(newItems: List<Recept>) {
+        recepts = newItems
+        notifyDataSetChanged() // уведомление об изменениях
     }
 
 }

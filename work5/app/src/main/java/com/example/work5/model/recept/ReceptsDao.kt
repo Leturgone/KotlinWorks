@@ -2,12 +2,13 @@ package com.example.work5.model.recept
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
 interface ReceptsDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(recept: Recept)
     @Query("SELECT * FROM recepts")
-    fun getAllRecepts():MutableList<Recept>
+    fun getAllRecepts():List<Recept>
 }
