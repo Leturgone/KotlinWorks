@@ -23,27 +23,28 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
-        val retrofit = Retrofit.Builder().baseUrl("https://dog.ceo/api/").addConverterFactory(GsonConverterFactory.create()).build()
+        val retrofit = Retrofit.Builder().baseUrl("https://dog.ceo/").addConverterFactory(GsonConverterFactory.create()).build()
 
         val dogApi = retrofit.create(MainApi::class.java)
 
 
         val db = Room.databaseBuilder(
-            applicationContext, DogDB::class.java,"dog db").build()
+            applicationContext, DogDB::class.java,"dog_db").build()
         val dogsDao= db.dogDao()
         val recyclerView = binding.reycler
         val dog_button = binding.dogButton
         val rep = DogsRepository(dogsDao,dogApi)
 
+        CoroutineScope(Dispatchers.IO).launch {
+            rep.getDogsFromApi()
+            val images = rep.getAllDogsFromBase()
+            runOnUiThread {
+                recyclerView.adapter = DogListAdapter(images)
+            }
+        }
         dog_button.setOnClickListener{
 
-            CoroutineScope(Dispatchers.IO).launch {
-                rep.getDogsFromApi()
-                val images = rep.getAllDogsFromBase()
-                runOnUiThread {
-                    recyclerView.adapter = DogListAdapter(images)
-                }
-            }
+
         }
 
     }

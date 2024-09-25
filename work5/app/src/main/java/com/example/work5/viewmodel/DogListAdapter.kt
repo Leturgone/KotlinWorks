@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.work5.R
 import com.example.work5.model.dog.Dog
 
-public class DogListAdapter(private val dogs: MutableList<Dog>)
+class DogListAdapter(private val dogs: MutableList<Dog>)
     : RecyclerView.Adapter<DogListAdapter.ViewHolder>(){
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val textView: TextView = view.findViewById(R.id.itemTextView)
