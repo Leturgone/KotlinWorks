@@ -1,12 +1,10 @@
 package com.example.work6.recept
 
 import android.util.Log
-import com.example.work6.recept.Recept
-import com.example.work6.recept.ReceptsDao
+
 import com.example.work6.retrofit.api.MainApi
 
 class ReceptsRepository(private  val receptsDao: ReceptsDao, private val receptsApi: MainApi) {
-
     suspend fun getReceptsFromApi(){
 
         for( i in 1..10) {

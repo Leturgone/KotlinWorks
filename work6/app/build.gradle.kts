@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation("io.insert-koin:koin-android:3.1.2")
 
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.6")
