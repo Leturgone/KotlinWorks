@@ -40,6 +40,14 @@ android {
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.6.1")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.6.1")
+    androidTestImplementation("androidx.test.espresso:espresso-accessibility:3.6.1")
+    androidTestImplementation("androidx.test.espresso:espresso-web:3.6.1")
+    androidTestImplementation("androidx.test.espresso.idling:idling-concurrent:3.6.1")
+
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
