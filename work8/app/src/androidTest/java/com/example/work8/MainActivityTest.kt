@@ -8,9 +8,11 @@ import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import org.hamcrest.CoreMatchers.containsString
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -39,6 +41,16 @@ class MainActivityTest {
         onView(withId(R.id.button)).perform(click())
         sleep(5000)
         onView(withId(R.id.imageView)).check(matches(isDisplayed()))
+    }
+    @Test
+    fun ErrorDownload(){
+        onView(withId(R.id.editTextText)).perform(typeText("rrr"), closeSoftKeyboard())
+        onView(withId(R.id.button)).perform(click())
+        sleep(5000)
+        // Утверждение о наличии Toast
+        onView(withText(containsString("Неверная ссылка")))
+            .check(matches(isDisplayed()))
+
 
     }
 

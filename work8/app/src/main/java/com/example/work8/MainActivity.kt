@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.work8.databinding.ActivityMainBinding
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -36,12 +37,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun downloadImageByURl(imageUrl: String): Bitmap {
+    private fun downloadImageByURl(imageUrl: String): Bitmap? {
         return try {
             val inputStream = URL(imageUrl).openStream()
             BitmapFactory.decodeStream(inputStream)
         } catch (e: Exception) {
-            throw e
+            Log.e("Network", "Ошибка при скачивании")
+            return null
         }
     }
     private  fun saveImageToDisk(bitmap: Bitmap) {
@@ -64,12 +66,19 @@ class MainActivity : AppCompatActivity() {
         val DiskTead = newSingleThreadContext("Disk")
         GlobalScope.launch(NetworkTread) {
             val bitmap = downloadImageByURl(image_url)
-            Log.i("Network", "Изображение скачано")
-            launch(Dispatchers.Main) {
-                binding.imageView.setImageBitmap(bitmap)
-            }.join()
-            launch(DiskTead){
-                saveImageToDisk(bitmap)
+            if (bitmap == null){
+                launch(Dispatchers.Main) {
+                    Toast.makeText(this@MainActivity, "Неверная ссылка", Toast.LENGTH_SHORT).show()
+                }
+            }
+            else {
+                Log.i("Network", "Изображение скачано")
+                launch(Dispatchers.Main) {
+                    binding.imageView.setImageBitmap(bitmap)
+                }.join()
+                launch(DiskTead) {
+                    saveImageToDisk(bitmap)
+                }
             }
         }
     }
