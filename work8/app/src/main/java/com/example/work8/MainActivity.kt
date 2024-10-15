@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun downloadImageByURl(imageUrl: String): Bitmap? {
+    fun downloadImageByURl(imageUrl: String): Bitmap? {
         return try {
             val inputStream = URL(imageUrl).openStream()
             BitmapFactory.decodeStream(inputStream)
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             return null
         }
     }
-    private  fun saveImageToDisk(bitmap: Bitmap) {
+    fun saveImageToDisk(bitmap: Bitmap) {
         val file = File(getOutputDirectory(), "image.jpg")
         file.outputStream().use {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
