@@ -76,6 +76,7 @@ class MainActivity : AppCompatActivity() {
             }
             else {
                 Log.i("Network", "Изображение скачано")
+
                 launch(Dispatchers.Main) {
                     binding.imageView.setImageBitmap(bitmap)
                     binding.imageView.visibility = View.VISIBLE
