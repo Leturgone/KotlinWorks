@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                 Log.i("Network", "Изображение скачано")
                 launch(Dispatchers.Main) {
                     binding.imageView.setImageBitmap(bitmap)
+                    Toast.makeText(this@MainActivity, "Изображение загружено", Toast.LENGTH_SHORT).show()
                 }.join()
                 launch(DiskTead) {
                     saveImageToDisk(bitmap)
