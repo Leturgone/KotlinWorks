@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         }
         Log.i("Disk","Фото сохранено: ${file.absolutePath}")
     }
-    private fun getOutputDirectory(): File {
+    fun getOutputDirectory(): File {
         val mediaDir = this.externalMediaDirs.firstOrNull()?.let {
             File(this.filesDir, "photos").apply { mkdirs() }
         }

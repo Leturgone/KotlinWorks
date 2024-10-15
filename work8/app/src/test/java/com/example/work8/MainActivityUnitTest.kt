@@ -17,11 +17,9 @@ class MainActivityUnitTest {
         Assert.assertEquals(null,mainActivity.downloadImageByURl(image_url_incorrect) )
     }
     @Test
-    fun savingUser_isCorrect() {
+    fun outputDirectory_isCorrect() {
+        //Сделать что полученный путь равен нужному
         Assert.assertEquals(4, 2 + 2)
     }
-    @Test
-    fun savingUser_isIncorrect() {
-        Assert.assertEquals(4, 2 + 2)
-    }
+
 }
