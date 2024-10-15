@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.work8.databinding.ActivityMainBinding
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        binding.textViewStatus.visibility = View.INVISIBLE;
         setContentView(binding.root)
         binding.button.setOnClickListener {
             val image_url = binding.editTextText.text.toString()
@@ -68,14 +70,16 @@ class MainActivity : AppCompatActivity() {
             val bitmap = downloadImageByURl(image_url)
             if (bitmap == null){
                 launch(Dispatchers.Main) {
-                    Toast.makeText(this@MainActivity, "Неверная ссылка", Toast.LENGTH_SHORT).show()
+                    binding.imageView.visibility = View.GONE
+                    binding.textViewStatus.visibility = View.VISIBLE
                 }
             }
             else {
                 Log.i("Network", "Изображение скачано")
                 launch(Dispatchers.Main) {
                     binding.imageView.setImageBitmap(bitmap)
-                    Toast.makeText(this@MainActivity, "Изображение загружено", Toast.LENGTH_SHORT).show()
+                    binding.imageView.visibility = View.VISIBLE
+                    binding.textViewStatus.visibility = View.GONE
                 }.join()
                 launch(DiskTead) {
                     saveImageToDisk(bitmap)

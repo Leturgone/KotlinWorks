@@ -18,7 +18,7 @@ class MainActivityUnitTest {
     }
     @Test
     fun outputDirectory_isCorrect() {
-        //Сделать что полученный путь равен нужному
+        val directory =
         Assert.assertEquals(4, 2 + 2)
     }
 
