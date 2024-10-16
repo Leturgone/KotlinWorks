@@ -75,8 +75,13 @@ fun Work91Theme(
     }
 
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = MyDarkSheme,
         typography = myFontStyle,
         content = content
     )
+    SideEffect {
+        val window = (view.context as Activity).window
+        window.statusBarColor = MyDarkSheme.primary.toArgb()
+        WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+    }
 }
