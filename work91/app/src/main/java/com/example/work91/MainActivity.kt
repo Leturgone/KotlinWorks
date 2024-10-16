@@ -33,9 +33,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                 ) {
                     Column(
-                        modifier = Modifier
-                            .fillMaxSize() //  Заполняет всё пространство
-                            .padding(16.dp), // Добавляем отступы для красивого внешнего вида
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
