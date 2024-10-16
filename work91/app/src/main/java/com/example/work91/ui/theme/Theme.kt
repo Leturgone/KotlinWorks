@@ -16,16 +16,15 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
+    primary = Pink80,
     secondary = PurpleGrey80,
     tertiary = Pink80
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
+    primary = Green,
     secondary = PurpleGrey40,
     tertiary = Pink40
-
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
     surface = Color(0xFFFFFBFE),
@@ -35,6 +34,19 @@ private val LightColorScheme = lightColorScheme(
     onBackground = Color(0xFF1C1B1F),
     onSurface = Color(0xFF1C1B1F),
     */
+)
+private  val MyDarkSheme = darkColorScheme(
+    primary = Green,
+    secondary = PurpleGrey40,
+    tertiary = Pink40,
+    background = GraphiteGrey
+
+)
+private val MyLightSheme = lightColorScheme(
+    primary = Green,
+    secondary = PurpleGrey40,
+    tertiary = Pink40,
+    background = GraphiteGrey
 )
 
 @Composable
@@ -50,8 +62,8 @@ fun Work91Theme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> MyDarkSheme
+        else -> MyLightSheme
     }
     val view = LocalView.current
     if (!view.isInEditMode) {
@@ -64,7 +76,7 @@ fun Work91Theme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = myFontStyle,
         content = content
     )
 }
