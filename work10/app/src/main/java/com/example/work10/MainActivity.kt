@@ -130,17 +130,16 @@ class MainActivity : ComponentActivity() {
         GlobalScope.launch(NetworkTread) {
             val bitmap = downloadImageByURl(image_url)
             if (bitmap == null) {
-                launch(Dispatchers.Main) {
-
-                }
-            } else {
+                Log.i("Network", "Ошибка при скачивании")
+            }
+            else {
                 Log.i("Network", "Изображение скачано")
+//                launch(Dispatchers.Main) {
+//                    binding.imageView.setImageBitmap(bitmap)
+//                    binding.imageView.visibility = View.VISIBLE
+//                    binding.textViewStatus.visibility = View.GONE
+//                }.join()
 
-                launch(Dispatchers.Main) {
-                    binding.imageView.setImageBitmap(bitmap)
-                    binding.imageView.visibility = View.VISIBLE
-                    binding.textViewStatus.visibility = View.GONE
-                }.join()
                 launch(DiskTead) {
                     saveImageToDisk(bitmap)
                 }
