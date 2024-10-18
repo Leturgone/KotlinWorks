@@ -45,9 +45,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Column {
-                        
+                        Greeting("Android")
                     }
-                    Greeting("Android")
                 }
             }
         }
