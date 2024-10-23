@@ -137,19 +137,19 @@ class MainActivity : ComponentActivity() {
                         }
 
                     }
-                }
-            ) {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                )
-                {
-                    NavHost(navController, startDestination = "home") {
-                        composable("home") { Greeting(imageList) }
-                        composable("list") { ListScreen(imageList) }
+                }, content = {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    )
+                    {
+                        NavHost(navController, startDestination = "home") {
+                            composable("home") { Greeting(imageList) }
+                            composable("list") { ListScreen(imageList) }
+                        }
                     }
                 }
-            }
+            )
         }
 
     }
@@ -196,14 +196,18 @@ class MainActivity : ComponentActivity() {
                             val image_url = text
 
                             if (image_url.isNotEmpty()) {
+                                //Создаем работку
                                 val workRequest = OneTimeWorkRequest.Builder(SaveToDiskWorker::class.java)
                                     .setInputData(workDataOf("image_url" to image_url))
                                     .build()
+                                //Ставим в очередь
                                 WorkManager.getInstance(this@MainActivity).enqueue(workRequest)
 
+                                //Отслеживаем статус выполения
                                 val workInfoLiveData = WorkManager.getInstance(this@MainActivity)
                                     .getWorkInfoByIdLiveData(workRequest.id)
 
+                                //Тут уже получаем данные чтоб подгрузить куда надо
                                 workInfoLiveData.observe(this@MainActivity) { workInfo ->
                                     if (workInfo.state == WorkInfo.State.SUCCEEDED) {
                                         val savedImagePath = workInfo.outputData.getString("path")
