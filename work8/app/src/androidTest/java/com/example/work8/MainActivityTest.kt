@@ -31,17 +31,20 @@ class MainActivityTest {
         onView(withId(R.id.editTextText)).check(matches(isDisplayed()))
         onView(withId(R.id.textViewStatus)).check(matches((not(isDisplayed()))))
     }
+
     @Test
     fun editTextTextTest(){
         //Ввод значения
         onView(withId(R.id.editTextText)).perform(typeText("Hello"), closeSoftKeyboard())
     }
+
     @Test
     fun  defaultImageBtn(){
         onView(withId(R.id.button)).perform(click())
         sleep(5000)
         onView(withId(R.id.imageView)).check(matches(isDisplayed()))
     }
+
     @Test
     fun ErrorDownload(){
         onView(withId(R.id.editTextText)).perform(typeText("rrr"), closeSoftKeyboard())
@@ -49,6 +52,7 @@ class MainActivityTest {
         sleep(800)
         onView(withId(R.id.textViewStatus)).check(matches(isDisplayed()))
     }
+
     @Test
     fun GoodDownload(){
         onView(withId(R.id.editTextText)).perform(typeText("https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/52548a69-37d6-44e7-829f-65f0eb9facfc/1920x"), closeSoftKeyboard())
